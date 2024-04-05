@@ -219,7 +219,7 @@ WorldStartingLevel:
 PlayerSelectMarioSprites1:
 	.db $8F, $00, $00, $48
 	.db $8F, $00, $40, $50
-	.db $9F, $02, $00, $48
+	.db $9F, $10, $00, $48
 	.db $9F, $02, $40, $50
 
 PlayerSelectLuigiSprites1:
@@ -230,7 +230,7 @@ PlayerSelectLuigiSprites1:
 
 PlayerSelectToadSprites1:
 	.db $8F, $08, $02, $88
-	.db $8F, $08, $42, $90
+	.db $8F, $14, $42, $90
 	.db $9F, $0A, $02, $88
 	.db $9F, $0A, $42, $90
 
@@ -241,9 +241,9 @@ PlayerSelectPrincessSprites1:
 	.db $9F, $0E, $43, $B0
 
 PlayerSelectMarioSprites2:
-	.db $8F, $10, $00, $48
+	.db $8F, $00, $00, $48
 	.db $8F, $12, $00, $50
-	.db $9F, $14, $00, $48
+	.db $9F, $10, $00, $48
 	.db $9F, $16, $00, $50
 
 PlayerSelectLuigiSprites2:
@@ -287,8 +287,8 @@ PlayerSelectSpritePalettesDark:
 	.db $3F, $10, $10 ; PPU Data
 	.db $0F, $22, $12, $01
 	.db $0F, $22, $12, $01
-	.db $0F, $22, $12, $01
-	.db $0F, $22, $12, $01
+	.db $0F, $12, $22, $01
+	.db $0F, $12, $22, $01
 
 PlayerSelectPaletteOffsets:
 	.db (PlayerSelectSpritePalettes_Mario - PlayerSelectSpritePalettes)
@@ -299,16 +299,16 @@ PlayerSelectPaletteOffsets:
 PlayerSelectSpritePalettes:
 PlayerSelectSpritePalettes_Mario:
 	.db $3F, $10, $04
-	.db $0F, $27, $16, $01
+	.db $0F, $2C, $15, $02
 PlayerSelectSpritePalettes_Luigi:
 	.db $3F, $14, $04
-	.db $0F, $36, $2A, $01
+	.db $0F, $30, $2B, $15
 PlayerSelectSpritePalettes_Toad:
 	.db $3F, $18, $04
-	.db $0F, $27, $30, $01
+	.db $0F, $25, $27, $04
 PlayerSelectSpritePalettes_Princess:
 	.db $3F, $1C, $04
-	.db $0F, $36, $25, $07
+	.db $0F, $35, $30, $1C
 
 TitleCardPalettes:
 	.db $3F, $00, $20 ; PPU data
@@ -797,8 +797,8 @@ CharacterSelectMenuLoop:
 ; ---------------------------------------------------------------------------
 
 loc_BANKF_E3AE:
-	LDA #SoundEffect1_CherryGet
-	STA SoundEffectQueue1
+	LDA #SoundEffect2_CoinGet
+	STA SoundEffectQueue2
 	LDX CurrentWorld
 	LDY CurrentLevel
 	JSR DisplayLevelTitleCardText
@@ -3322,6 +3322,8 @@ PlayerHealthValueByHeartCount:
 	.db PlayerHealth_2_HP
 	.db PlayerHealth_3_HP
 	.db PlayerHealth_4_HP
+	.db PlayerHealth_5_HP
+	.db PlayerHealth_6_HP
 ; Max hearts = (hearts - 2), value is 0,$01,2
 ; This table determines what the player's HP is set to
 
@@ -3481,24 +3483,24 @@ GetMoveCameraX_Exit:
 
 ; Tiles to use for eye sprite. If $00, this will use the character-specific table
 CharacterFrameEyeTiles:
-	.db $00 ; Walk1
-	.db $00 ; Carry1
-	.db $00 ; Walk2
-	.db $00 ; Carry2
+	.db $FB ; Walk1
+	.db $FB ; Carry1
+	.db $FB ; Walk2
+	.db $FB ; Carry2
 	.db $FB ; Duck
 	.db $FB ; DuckCarry
-	.db $00 ; Jump
+	.db $FB ; Jump
 	.db $FB ; Death
 	.db $FB ; Lift
-	.db $00 ; Throw
+	.db $FB ; Throw
 	.db $FB ; Climb
 
 ; Specific to each character
 CharacterEyeTiles:
-	.db $D5 ; Mario
-	.db $D9 ; Luigi
+	.db $FB ; Mario
+	.db $FB ; Luigi
 	.db $FB ; Toad
-	.db $D7 ; Princess
+	.db $FB ; Princess
 
 CharacterTiles_Walk1:
 	.db $00
@@ -3528,7 +3530,7 @@ CharacterTiles_Duck:
 	.db $FB ; $0e
 	.db $FB ; $0f
 	.db $2C ; $10
-	.db $2C ; $11
+	.db $34 ; $11
 
 CharacterTiles_DuckCarry:
 	.db $FB ; $12
@@ -3567,8 +3569,8 @@ CharacterTiles_Climb:
 	.db $1E ; $29
 
 CharacterTiles_PrincessJumpBody:
-	.db $B4 ; $2a
-	.db $B6 ; $2b
+	.db $10 ; $2a
+	.db $12 ; $2b
 
 DamageInvulnBlinkFrames:
 	.db $01, $01, $01, $02, $02, $04, $04, $04
@@ -3583,7 +3585,7 @@ ChangePlayerPoofTiles:
 	.db $38
 	.db $38
 	.db $36
-	.db $34
+	.db $B4
 ENDIF
 
 ;
@@ -3707,9 +3709,6 @@ loc_BANKF_F350:
 
 loc_BANKF_F382:
 	LDA CurrentCharacter
-	CMP #Character_Princess
-	BEQ loc_BANKF_F394
-
 	CPY #$00
 	BNE loc_BANKF_F394
 
@@ -3818,10 +3817,6 @@ loc_BANKF_F413:
 	LDA PlayerCurrentSize
 	BNE loc_BANKF_F43F
 
-	LDA CurrentCharacter
-	CMP #Character_Princess
-	BNE loc_BANKF_F43F
-
 	LDA PlayerAnimationFrame
 	CMP #SpriteAnimation_Jumping
 	BNE loc_BANKF_F43F
@@ -3842,10 +3837,6 @@ loc_BANKF_F44A:
 	LDA CharacterTiles_Walk1, X
 	STA SpriteDMAArea + $25
 	LDA PlayerCurrentSize
-	BNE loc_BANKF_F46F
-
-	LDA CurrentCharacter
-	CMP #Character_Princess
 	BNE loc_BANKF_F46F
 
 	LDA PlayerAnimationFrame
@@ -5193,13 +5184,8 @@ IFNDEF RESPAWN_INSTEAD_OF_DEATH
 	; Set music to death jingle
 	LDA #Music2_DeathJingle
 	STA MusicQueue2
-	; BUG: Setting DPCM at the same time as music
-	LDA #DPCM_PlayerDeath
-	STA DPCMQueue
 	RTS
 ELSE
-	LDA #DPCM_PlayerDeath
-	STA DPCMQueue
 	JMP RespawnPlayer
 	NOP
 	NOP
