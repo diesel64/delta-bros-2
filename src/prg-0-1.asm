@@ -1010,7 +1010,6 @@ sub_BANK0_84AC:
 ; Unused space in the original ($84B8 - $84FF)
 unusedSpace $8500, $FF
 
-
 ;
 ; Initializes a horizontal area
 ;
@@ -1908,6 +1907,7 @@ SetObjectLocks_Loop:
 unusedSpace $8A00, $FF
 
 
+
 GrowShrinkSFXIndexes:
 	.db SoundEffect2_Shrinking
 	.db SoundEffect2_Growing
@@ -1923,7 +1923,7 @@ ENDIF
 	BCS loc_BANK0_8A26 ; If the player is changing size, just handle that
 
 	LDA #$00 ; Check if the player needs to change size
-	LDY #$10
+	LDY #$00
 	CPY PlayerHealth
 	ROL A
 	EOR PlayerCurrentSize
@@ -1955,7 +1955,7 @@ IFNDEF RESPAWN_INSTEAD_OF_DEATH
 ELSE
 	.dw HandlePlayerState_Respawning
 ENDIF
-	.dw HandlePlayerState_ChangingSize ; Changing size
+	.dw HandlePlayerState_Dying ; Changing size
 
 
 HandlePlayerState_Normal:
@@ -2372,38 +2372,6 @@ loc_BANK0_8BE9:
 	STA PlayerState
 
 locret_BANK0_8BEB:
-	RTS
-
-
-; Alternate between large and small graphics on these frames when changing size
-ChangingSizeKeyframes:
-	.db $05
-	.db $0A
-	.db $0F
-	.db $14
-	.db $19
-
-
-HandlePlayerState_ChangingSize:
-	LDA PlayerStateTimer
-	BEQ loc_BANK0_8C0D
-
-	INC DamageInvulnTime
-
-	LDY #$04
-HandlePlayerState_ChangingSize_Loop:
-	CMP ChangingSizeKeyframes, Y
-	BNE HandlePlayerState_ChangingSize_Next
-
-	LDA PlayerCurrentSize
-	EOR #$01
-	STA PlayerCurrentSize
-	JMP LoadCharacterCHRBanks
-
-HandlePlayerState_ChangingSize_Next:
-	DEY
-	BPL HandlePlayerState_ChangingSize_Loop
-
 	RTS
 
 ; ---------------------------------------------------------------------------
@@ -4996,7 +4964,7 @@ TitleLayout:
 	.db $22, $E4, $02, $A7, $A9
 	.db $22, $FA, $04, $80, $82, $88, $8A
 	.db $23, $04, $02, $90, $92
-	.db $23, $14, $02, $9E, $A0
+	.db $23, $14, $05, $9E, $A0, $78, $7E, $7F
 	.db $23, $1A, $04, $81, $83, $89, $8B
 	.db $23, $23, $03, $46, $91, $93
 	.db $23, $2A, $02, $A2, $A4
@@ -5022,13 +4990,13 @@ IFNDEF SM_USA
 	.db $21, $38, $02, $F9, $FA
 
 	; MARIO
-	;                  MMMMMMMMMMMMM  AAAAAAAA  RRRRRRRR  III  OOOOOOOO
-	.db $21, $46, $0A, $00, $0F, $01, $00, $01, $FC, $01, $08, $00, $01
-	.db $21, $66, $0A, $10, $10, $08, $10, $08, $10, $08, $08, $10, $08
-	.db $21, $86, $0A, $08, $08, $08, $08, $08, $13, $0D, $08, $08, $08
-	.db $21, $A6, $0A, $08, $08, $08, $FC, $08, $0E, $08, $08, $08, $08
-	.db $21, $C6, $0A, $08, $08, $08, $10, $08, $08, $08, $08, $04, $05
-	.db $21, $E6, $0A, $09, $09, $09, $09, $09, $09, $09, $09, $06, $07
+	;                  DDDDDDDD  EEEEEEEE  LLLLLLLL  TTTTTTTT  AAAAAAAA
+	.db $21, $46, $0A, $FC, $01, $FC, $08, $08, $78, $FC, $08, $00, $01
+	.db $21, $66, $0A, $10, $08, $10, $09, $08, $78, $16, $79, $10, $08
+	.db $21, $86, $0A, $08, $08, $13, $08, $08, $78, $7A, $7B, $08, $08
+	.db $21, $A6, $0A, $08, $08, $0F, $09, $08, $78, $7A, $7B, $FC, $08
+	.db $21, $C6, $0A, $13, $05, $FC, $08, $FC, $08, $7A, $7B, $10, $08
+	.db $21, $E6, $0A, $11, $07, $76, $09, $76, $09, $7C, $7D, $09, $09
 
 	; BROS
 	;                  BBBBBBBB  RRRRRRRR  OOOOOOOO  SSSSSSSS
@@ -5041,7 +5009,7 @@ IFNDEF SM_USA
 
 	; 2
 	;             22222222222222222222222
-	.db $22, $0E, $04, $14, $15, $16, $17
+	.db $22, $0E, $04, $14, $15, $15, $17
 	.db $22, $2E, $04, $18, $19, $1A, $1B
 	.db $22, $4E, $04, $1C, $1D, $1E, $1F
 	.db $22, $6E, $04, $FC, $FC, $FC, $20
@@ -5175,60 +5143,60 @@ TitleStoryTextPointersLo:
 	.db <TitleStoryText_Line16
 
 TitleStoryText_Line01:
-	.db $F0, $E1, $DE, $E7, $FB, $FB, $E6, $DA, $EB, $E2, $E8, $FB, $E8, $E9, $DE, $E7
-	.db $DE, $DD, $FB, $DA ; WHEN MARIO OPENED A
+	.db $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB
+	.db $FB, $FB, $FB, $FB ; (blank)
 
 TitleStoryText_Line02:
-	.db $DD, $E8, $E8, $EB, $FB, $DA, $DF, $ED, $DE, $EB, $FB, $FB, $DC, $E5, $E2, $E6
-	.db $DB, $E2, $E7, $E0 ; DOOR AFTER CLIMBING
+	.db $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB
+	.db $FB, $FB, $FB, $FB ; (blank)
 
 TitleStoryText_Line03:
-	.db $DA, $FB, $E5, $E8, $E7, $E0, $FB, $EC, $ED, $DA, $E2, $EB, $FB, $E2, $E7, $FB
-	.db $FB, $E1, $E2, $EC ; A LONG STAIR IN HIS
+	.db $E0, $E8, $DD, $FB, $FB, $DF, $EE, $DC, $E4, $E2, $E7, $E0, $FB, $FB, $DD, $DA
+	.db $E6, $E7, $E2, $ED ; GOD  FUCKING  DAMNIT
 
 TitleStoryText_Line04:
-	.db $DD, $EB, $DE, $DA, $E6, $F7, $FB, $DA, $E7, $E8, $ED, $E1, $DE, $EB, $FB, $F0
-	.db $E8, $EB, $E5, $DD ; DREAM, ANOTHER WORLD
+	.db $E4, $EB, $E2, $EC, $FB, $FB, $F0, $E1, $DE, $EB, $DE, $FB, $ED, $E1, $DE, $FB
+	.db $DF, $EE, $DC, $E4 ; KRIS  WHERE THE FUCK
 
 TitleStoryText_Line05:
-	.db $EC, $E9, $EB, $DE, $DA, $DD, $FB, $FB, $FB, $DB, $DE, $DF, $E8, $EB, $DE, $FB
-	.db $FB, $E1, $E2, $E6 ; SPREAD BEFORE HIM
+	.db $DA, $EB, $DE, $FB, $FB, $F0, $DE, $F7, $F5, $FB, $FB, $FB, $FB, $FB, $FB, $FB
+	.db $FB, $FB, $FB, $FB ; ARE  WE!?
 
 TitleStoryText_Line06:
-	.db $DA, $E7, $DD, $FB, $E1, $DE, $FB, $E1, $DE, $DA, $EB, $DD, $FB, $DA, $FB, $EF
-	.db $E8, $E2, $DC, $DE ; AND HE HEARD A VOICE
+	.db $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB
+	.db $FB, $FB, $FB, $FB ; (blank)
 
 TitleStoryText_Line07:
-	.db $DC, $DA, $E5, $E5, $FB, $DF, $E8, $EB, $FB, $E1, $DE, $E5, $E9, $FB, $ED, $E8
-	.db $FB, $FB, $DB, $DE ; CALL FOR HELP TO BE
+	.db $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB
+	.db $FB, $FB, $FB, $FB ; (blank)
 
 TitleStoryText_Line08:
-	.db $FB, $DF, $EB, $DE, $DE, $DD, $FB, $FB, $DF, $EB, $E8, $E6, $FB, $DA, $FB, $EC
-	.db $E9, $DE, $E5, $E5 ; FREED FROM A SPELL
+	.db $FB, $FB, $E9, $EE, $EC, $E1, $FB, $EC, $ED, $DA, $EB, $ED, $FB, $DB, $EE, $ED
+	.db $ED, $E8, $E7, $FB ; PUSH START BUTTON
 
 TitleStoryText_Line09:
-	.db $DA, $DF, $ED, $DE, $EB, $FB, $FB, $DA, $F0, $DA, $E4, $DE, $E7, $E2, $E7, $E0
-	.db $F7, $FB, $FB, $FB ; AFTER AWAKENING,
+	.db $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB
+	.db $FB, $FB, $FB, $FB ; (blank)
 
 TitleStoryText_Line10:
-	.db $E6, $DA, $EB, $E2, $E8, $FB, $FB, $F0, $DE, $E7, $ED, $FB, $ED, $E8, $FB, $FB
-	.db $DA, $FB, $FB, $FB ; MARIO WENT TO A
+	.db $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB
+	.db $FB, $FB, $FB, $FB ; (blank)
 
 TitleStoryText_Line11:
-	.db $DC, $DA, $EF, $DE, $FB, $FB, $E7, $DE, $DA, $EB, $DB, $F2, $FB, $DA, $E7, $DD
-	.db $FB, $FB, $ED, $E8 ; CAVE NEARBY AND TO
+	.db $E0, $E8, $DD, $FB, $FB, $DF, $EE, $DC, $E4, $E2, $E7, $E0, $FB, $FB, $DD, $DA
+	.db $E6, $E7, $E2, $ED ; GOD  FUCKING  DAMNIT
 
 TitleStoryText_Line12:
-	.db $E1, $E2, $EC, $FB, $FB, $EC, $EE, $EB, $E9, $EB, $E2, $EC, $DE, $FB, $E1, $DE
-	.db $FB, $EC, $DA, $F0 ; HIS SURPRISE HE SAW
+	.db $E4, $EB, $E2, $EC, $FB, $FB, $F0, $E1, $DE, $EB, $DE, $FB, $ED, $E1, $DE, $FB
+	.db $DF, $EE, $DC, $E4 ; KRIS  WHERE THE FUCK
 
 TitleStoryText_Line13:
-	.db $DE, $F1, $DA, $DC, $ED, $E5, $F2, $FB, $FB, $F0, $E1, $DA, $ED, $FB, $E1, $DE
-	.db $FB, $EC, $DA, $F0 ; EXACTLY WHAT HE SAW
+	.db $DA, $EB, $DE, $FB, $FB, $F0, $DE, $F7, $F5, $FB, $FB, $FB, $FB, $FB, $FB, $FB
+	.db $FB, $FB, $FB, $FB ; ARE  WE!?
 
 TitleStoryText_Line14:
-	.db $E2, $E7, $FB, $E1, $E2, $EC, $FB, $DD, $EB, $DE, $DA, $E6, $CF, $CF, $CF, $CF
-	.db $FB, $FB, $FB, $FB ; IN HIS DREAM....
+	.db $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB
+	.db $FB, $FB, $FB, $FB ; (blank)
 
 TitleStoryText_Line15:
 	.db $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB, $FB
@@ -5574,8 +5542,8 @@ loc_BANK0_9BCB:
 	ADC #$00
 	STA TitleScreenPPUAddrHi
 	LDA TitleScreenStoryTextIndex
-	CMP #$09
-	BCC loc_BANK0_9C19
+	; CMP #$09
+	; BCC loc_BANK0_9C19
 
 	BNE loc_BANK0_9C0B
 
@@ -6483,10 +6451,10 @@ EndingCelebrationPaletteFade1:
 	.db $01, $30, $16, $0F
 	.db $01, $28, $18, $0F
 	.db $01, $30, $30, $01
-	.db $01, $27, $16, $0F
-	.db $01, $37, $2A, $0F
-	.db $01, $27, $30, $0F
-	.db $01, $36, $25, $0F
+	.db $01, $28, $29, $08 ; Kris
+	.db $01, $30, $2B, $15 ; Ralsei
+	.db $01, $23, $03, $08 ; Susie
+	.db $01, $26, $27, $07 ; Noelle
 	.db $00
 
 EndingCelebrationPaletteFade2:
@@ -6528,20 +6496,20 @@ ContributorCharacterOAMData:
 	.db $5F, $65, $20, $50
 	.db $5F, $67, $20, $58
 	; Luigi
-	.db $4F, $69, $21, $68
-	.db $4F, $6B, $21, $70
-	.db $5F, $6D, $21, $68
-	.db $5F, $6F, $21, $70
+	.db $4F, $6B, $21, $68
+	.db $4F, $6B, $61, $70
+	.db $5F, $6F, $21, $68
+	.db $5F, $6F, $61, $70
 	; Toad
 	.db $4F, $83, $22, $88
-	.db $4F, $83, $62, $90
+	.db $4F, $69, $62, $90
 	.db $5F, $87, $22, $88
-	.db $5F, $87, $62, $90
+	.db $5F, $99, $62, $90
 	; Princess
 	.db $4F, $8B, $23, $A0
-	.db $4F, $8D, $23, $A8
+	.db $4F, $8B, $63, $A8
 	.db $5F, $8F, $23, $A0
-	.db $5F, $91, $23, $A8
+	.db $5F, $8F, $63, $A8
 
 
 ;
@@ -7040,41 +7008,41 @@ loc_BANK1_ACD6:
 
 ContributorAnimationTiles:
 ContributorAnimationTiles_Mario:
-	.db $61
-	.db $61
-	.db $63
-	.db $93
-	.db $65
-	.db $65
-	.db $67
-	.db $67
+	.db $61 ; Head Left Frame 1
+	.db $61 ; Head Left Frame 2
+	.db $63 ; Head Right Frame 1
+	.db $93 ; Head Right Frame 2
+	.db $65 ; Body Left Frame 1
+	.db $65 ; Body Left Frame 2
+	.db $67 ; Body Right Frame 1
+	.db $67 ; Body Right Frame 2
 ContributorAnimationTiles_Luigi:
-	.db $69
-	.db $69
-	.db $95
-	.db $6B
-	.db $6D
-	.db $6D
-	.db $97
-	.db $6F
+	.db $95 ; Head Left Frame 1
+	.db $6B ; Head Left Frame 2
+	.db $95 ; Head Right Frame 1
+	.db $6B ; Head Right Frame 2
+	.db $97 ; Body Left Frame 1
+	.db $6F ; Body Left Frame 2
+	.db $97 ; Body Right Frame 1
+	.db $6F ; Body Right Frame 2
 ContributorAnimationTiles_Toad:
-	.db $83
-	.db $85
-	.db $83
-	.db $85
-	.db $87
-	.db $89
-	.db $87
-	.db $89
+	.db $83 ; Head Left Frame 1
+	.db $85 ; Head Left Frame 2
+	.db $69 ; Head Right Frame 1
+	.db $85 ; Head Right Frame 2
+	.db $87 ; Body Left Frame 1
+	.db $89 ; Body Left Frame 2
+	.db $99 ; Body Right Frame 1
+	.db $6D ; Body Right Frame 2
 ContributorAnimationTiles_Princess:
-	.db $8B
-	.db $8B
-	.db $99
-	.db $8D
-	.db $8F
-	.db $8F
-	.db $91
-	.db $91
+	.db $8B ; Head Left Frame 1
+	.db $8D ; Head Left Frame 2
+	.db $8B ; Head Right Frame 1
+	.db $8D ; Head Right Frame 2
+	.db $8F ; Body Left Frame 1
+	.db $91 ; Body Left Frame 2
+	.db $8F ; Body Right Frame 1
+	.db $91 ; Body Right Frame 2
 
 ContributorAnimationTilesOffset:
 	.db (ContributorAnimationTiles_Mario - ContributorAnimationTiles + 6)
@@ -7253,21 +7221,23 @@ ContributorTicker:
 ContributorTicker_Exit:
 	RTS
 
+; DA DB DC DD DE DF E0 E1 E2 E3 E4 E5 E6 E7 E8 E9 EA EB EC ED EE EF F0 F1 F2 F3
+; A  B  C  D  E  F  G  H  I  J  K  L  M  N  O  P  Q  R  S  T  U  V  W  X  Y  Z
 
 EndingCelebrationText_MARIO:
-	.db $20, $ED, $08, $E6, $DA, $EB, $E2, $E8, $FB, $FB, $FB
+	.db $20, $ED, $08, $E4, $EB, $E2, $EC, $FB, $FB, $FB, $FB
 	.db $00
 
 EndingCelebrationText_PRINCESS:
-	.db $20, $ED, $08, $E9, $EB, $E2, $E7, $DC, $DE, $EC, $EC
+	.db $20, $ED, $08, $E7, $E8, $DE, $E5, $E5, $DE, $FB, $FB
 	.db $00
 
 EndingCelebrationText_TOAD:
-	.db $20, $ED, $08, $ED, $E8, $DA, $DD, $FB, $FB, $FB, $FB
+	.db $20, $ED, $08, $EC, $EE, $EC, $E2, $DE, $FB, $FB, $FB
 	.db $00
 
 EndingCelebrationText_LUIGI:
-	.db $20, $ED, $08, $E5, $EE, $E2, $E0, $E2, $FB, $FB, $FB
+	.db $20, $ED, $08, $EB, $DA, $E5, $EC, $DE, $E2, $FB, $FB
 	.db $00
 
 
@@ -7963,7 +7933,7 @@ CheckPlayer2Joypad_CheckUp:
 	LDY PlayerMaxHealth
 	LDA PlayerHealth
 	CLC
-	ADC #$10
+	ADC #$20
 	STA PlayerHealth
 
 CheckPlayer2Joypad_CheckDown:
@@ -8147,9 +8117,6 @@ SetCurrentCharacter_Update:
 
 	; update chr for character
 	JSR LoadCharacterCHRBanks
-
-	LDA #DPCM_PlayerDeath
-	STA DPCMQueue
 
 SetCurrentCharacter_Exit:
 	RTS
