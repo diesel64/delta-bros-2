@@ -1118,6 +1118,7 @@ PlayerHealth:
 ; $00: Max 2
 ; $01: Max 3
 ; $02: Max 4
+; $03: Max 5
 PlayerMaxHealth:
 	.dsb 1 ; $04c3
 POWQuakeTimer:
