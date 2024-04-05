@@ -123,7 +123,7 @@ IFNDEF EXPAND_MUSIC
   DPCM_BossDeath = $10
   DPCM_DrumSample_B = $20
   DPCM_BossHurt = $40
-  DPCM_PlayerDeath = $80
+  DPCM_PlayerHealed = $80
 ELSE
   DPCM_DoorOpenBombBom = $01
   DPCM_DrumSample_A = $02
@@ -132,7 +132,7 @@ ELSE
   DPCM_BossDeath = $05
   DPCM_DrumSample_B = $06
   DPCM_BossHurt = $07
-  DPCM_PlayerDeath = $08
+  DPCM_PlayerHealed = $08
 ENDIF
 
 ; ---------------------------------------------------------------------------
@@ -272,6 +272,8 @@ PlayerHealth_1_HP = $0F
 PlayerHealth_2_HP = $1F
 PlayerHealth_3_HP = $2F
 PlayerHealth_4_HP = $3F
+PlayerHealth_5_HP = $4F
+PlayerHealth_6_HP = $5F
 
 ; ---------------------------------------------------------------------------
 
