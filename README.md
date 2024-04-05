@@ -1,5 +1,5 @@
 # Super Delta Bros. 2
-[![Logo](tools/smb2-0.png "Logo")]\
+![Logo](tools/smb2-0.png "Logo")
 
 ----
 
