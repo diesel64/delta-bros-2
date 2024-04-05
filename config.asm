@@ -61,7 +61,7 @@ PRESERVE_UNUSED_SPACE = 1
 ;          at the worst possible time.
 ;          The fix just waits for an NMI cycle before doing its work.
 ;
-; REV_A = 1
+REV_A = 1
 
 ; ----------------------------------------
 ; Build Super Mario USA ROM.
@@ -87,19 +87,19 @@ ENDIF
 
 
 ; Show all 8 frames of CHR cycling animation
-; FIX_CHR_CYCLE = 1
+FIX_CHR_CYCLE = 1
 
 ; Fixes the POW falling log glitch
-; FIX_POW_LOG_GLITCH = 1
+FIX_POW_LOG_GLITCH = 1
 
 ; Fixes vine climbing bug when holding up and down simultaneously
-; FIX_CLIMB_ZIP = 1
+FIX_CLIMB_ZIP = 1
 
 ; Fixes green platform tiles in Subspace
-; FIX_SUBSPACE_TILES = 1
+FIX_SUBSPACE_TILES = 1
 
 ; Fixes rare softlock when Fryguy doesn't create all four mini flames
-; FIX_FRYGUY_SPLIT_COUNT = 1
+FIX_FRYGUY_SPLIT_COUNT = 1
 
 ; Supports D1 joypad data for expansion port controllers
 ; JOYPAD_D1 = 1
@@ -113,7 +113,7 @@ ENDIF
 ; DISABLE_BONUS_CHANCE = 1
 
 ; Go to the Charater Select screen after death
-; CHARACTER_SELECT_AFTER_DEATH = 1
+CHARACTER_SELECT_AFTER_DEATH = 1
 
 ; Respawn at the beginning of the area instead of dying
 ; RESPAWN_INSTEAD_OF_DEATH = 1
@@ -129,7 +129,7 @@ ENDIF
 
 ; Include debugging tools
 ; (push Select to open the debug menu)
-; DEBUG = 1
+DEBUG = 1
 
 ; Include controller 2 debug features
 ; (@TODO: explain usage)
@@ -143,7 +143,7 @@ ENDIF
 
 
 ; Expand PRG and/or CHR to max capacity
-; EXPAND_PRG = 1
+EXPAND_PRG = 1
 ; EXPAND_CHR = 1
 
 ; Use MMC5 (mapper 5) instead of MMC3 (mapper 4)
@@ -164,7 +164,7 @@ ENDIF
 ; EXPAND_TABLES = 1
 
 ; Skip unnecessary bonus chance RAM copy
-; BONUS_CHANCE_RAM_CLEANUP = 1
+BONUS_CHANCE_RAM_CLEANUP = 1
 
 ; Uses an alternative pointer method for music headers to allow for more segments
 ; EXPAND_MUSIC = 1
@@ -173,7 +173,7 @@ ENDIF
 ; AREA_HEADER_TILESET = 1
 
 ; Checks the CHR latch variable to reload the CHR data
-; RESET_CHR_LATCH = 1
+RESET_CHR_LATCH = 1
 
 ; Encode level engine object mode switch in unused 2 bits of area header byte 4
 ; ENABLE_LEVEL_OBJECT_MODE = 1
@@ -191,10 +191,19 @@ ENDIF
 ; DISABLE_DOOR_POINTERS = 1
 
 ; Enables full-page door/vine searching so that entrances don't need to align
-; ROBUST_TRANSITION_SEARCH = 1
+ROBUST_TRANSITION_SEARCH = 1
 
 ; Use RAM address for player hitbox offset rather than PlayerDucking
-; PLAYER_HITBOX = 1
+PLAYER_HITBOX = 1
+
+; Use snd_power from Deltarune for hearts
+; DELTARUNE_HEAL_SOUND = 1
+
+; Use snd_badexplosion from Deltarune for bombs
+; DELTARUNE_EXPLOSION = 1
+
+; Allow for stomping enemies like other Mario games
+; JUMP_STOMPS = 1
 
 
 .endinl
