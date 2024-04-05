@@ -83,7 +83,7 @@ BonusChanceLayout:
 	.db $22, $E4, $02, $A7, $A9
 	.db $22, $FA, $04, $80, $82, $88, $8A
 	.db $23, $04, $02, $90, $92
-	.db $23, $14, $02, $9E, $A0
+	.db $23, $14, $05, $9E, $A0, $20, $F8, $FA
 	.db $23, $1A, $04, $81, $83, $89, $8B
 	.db $23, $23, $03, $46, $91, $93
 	.db $23, $2A, $02, $A2, $A4
@@ -370,13 +370,13 @@ PrincessStats:
 
 CharacterPalette:
 MarioPalette:
-	.db $0F, $01, $16, $27
+	.db $0F, $02, $15, $2C
 PrincessPalette:
-	.db $0F, $06, $25, $36
+	.db $0F, $1C, $30, $35
 ToadPalette:
-	.db $0F, $01, $30, $27
+	.db $0F, $04, $27, $25
 LuigiPalette:
-	.db $0F, $01, $2A, $36
+	.db $0F, $15, $2B, $30
 
 ;
 ; What is this for? It gets copied to RAM and then...that's all.
@@ -559,8 +559,8 @@ PlayerSelectPalettes:
 	.db $0F, $30, $12, $16
 	.db $0F, $22, $12, $01
 	.db $0F, $22, $12, $01
-	.db $0F, $22, $12, $01
-	.db $0F, $22, $12, $01
+	.db $0F, $12, $22, $01
+	.db $0F, $12, $22, $01
 	.db $00
 
 BonusChanceText_X_1:
