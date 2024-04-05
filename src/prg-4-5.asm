@@ -57,28 +57,28 @@ ProcessOnlyMusicQueue2:
 
 
 ProcessSoundEffectQueue2_Jump:
-	LDA #$42
+	LDA #$34
 	LDX #$82
-	LDY #$A8
+	LDY #$A7
 	JSR PlaySquare1Sweep
 
-	LDA #$22
+	LDA #$28
 	STA SoundEffectTimer2
 
 ProcessSoundEffectQueue2_JumpPart2:
 	LDA SoundEffectTimer2
-	CMP #$20
+	CMP #$25
 	BNE ProcessSoundEffectQueue2_JumpPart3
 
-	LDX #$DF
+	LDX #$5F
 	LDY #$F6
 	BNE ProcessSoundEffectQueue2_SetSquare1ThenDecrementTimer
 
 ProcessSoundEffectQueue2_JumpPart3:
-	CMP #$1A
+	CMP #$20
 	BNE ProcessSoundEffectQueue2_ThenDecrementTimer
 
-	LDX #$C1
+	LDX #$48
 	LDY #$BC
 
 ProcessSoundEffectQueue2_SetSquare1ThenDecrementTimer:
@@ -226,27 +226,23 @@ ProcessSoundEffectQueue2_ShrinkingPart3:
 	JMP ProcessSoundEffectQueue2_DecrementTimer
 
 ProcessSoundEffectQueue2_Growing:
-	LDA #$36
+	LDA #$26
+	LDY #$99
+
+	LDX #$9E
 	STA SoundEffectTimer2
+	LDA #$FF
+	JSR PlaySquare1Sweep
 
 ProcessSoundEffectQueue2_GrowingPart2:
 	LDA SoundEffectTimer2
-	LSR A
-	BCS ProcessSoundEffectQueue2_DecrementTimer
+	CMP #$06
+	BNE ProcessSoundEffectQueue2_GrowingPart3
+	LDA #$BB
+	STA SQ1_LO-1
 
-	TAY
-	LDA GrowingSoundData - 1, Y
-	LDX #$5D
-	LDY #$7F
-	JSR PlaySquare1Sweep
-
-	JMP ProcessSoundEffectQueue2_DecrementTimer
-
-; Fun fact: When you slow this down, you get the SMB1 end of level fanfare.
-GrowingSoundData:
-	.db $6A, $74, $6A, $64, $5C, $52, $5C, $52, $4C, $44, $66, $70, $66, $60, $58, $4E
-	.db $58, $4E, $48, $40, $56, $60, $56, $50, $48, $3E, $48, $3E, $38, $30 ; $10
-
+ProcessSoundEffectQueue2_GrowingPart3:
+	BNE ProcessSoundEffectQueue2_DecrementTimer
 
 ProcessSoundEffectQueue1:
 	LDA SoundEffectQueue1
@@ -468,7 +464,7 @@ DMCStartTable:
 	.db (DPCMSampleData_BossDeath - DPCMSampleData)/64 ; $31
 	.db (DPCMSampleData_DrumSample - DPCMSampleData)/64 ; $60
 	.db (DPCMSampleData_BossHurt - DPCMSampleData)/64 ; $0E
-	.db (DPCMSampleData_PlayerDeath - DPCMSampleData)/64 ; $1D
+	.db (DPCMSampleData_PlayerHealed - DPCMSampleData)/64
 
 DMCLengthTable:
 	.db (DPCMSampleDataEnd_DoorOpenBombBom - DPCMSampleData_DoorOpenBombBom)/16 ; $43
@@ -478,7 +474,7 @@ DMCLengthTable:
 	.db (DPCMSampleDataEnd_BossDeath - DPCMSampleData_BossDeath)/16 ; $48
 	.db (DPCMSampleDataEnd_DrumSample_B - DPCMSampleData_DrumSample)/16 ; $28
 	.db (DPCMSampleDataEnd_BossHurt - DPCMSampleData_BossHurt)/16 ; $3C
-	.db (DPCMSampleDataEnd_PlayerDeath - DPCMSampleData_PlayerDeath)/16 ; $50
+	.db (DPCMSampleDataEnd_PlayerHealed - DPCMSampleData_PlayerHealed)/16
 
 DMCFreqTable:
 	.db $0E
@@ -489,8 +485,9 @@ DMCFreqTable:
 	.db $0F
 	.db $0F
 	.db $0F
-	.db $60 ; ???
 
+	; unused
+	RTS
 
 ProcessMusicQueue_ThenReadNoteData:
 	JMP ProcessMusicQueue_ReadNoteData
