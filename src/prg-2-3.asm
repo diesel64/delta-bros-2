@@ -11,7 +11,7 @@ CarryYOffsets:
 CarryYOffsetBigLo:
 	.db $FA ; Mario
 	.db $F6 ; Princess
-	.db $FC ; Toad
+	.db $F5 ; Toad
 	.db $F7 ; Luigi
 
 CarryYOffsetBigHi:
@@ -5477,10 +5477,10 @@ EnemyTilemap1:
 	.db $3A, $3A ; $48
 	.db $38, $38 ; $4A
 	.db $38, $38 ; $4C
-	.db $36, $36 ; $4E
-	.db $36, $36 ; $50
-	.db $34, $34 ; $52
-	.db $34, $34 ; $54
+	.db $B6, $B6 ; $4E
+	.db $B6, $B6 ; $50
+	.db $B4, $B4 ; $52
+	.db $B4, $B4 ; $54
 	; Bullet
 	.db $AE, $FB ; $56
 	.db $AE, $FB ; $58
@@ -5665,11 +5665,6 @@ SetSpriteTempScreenPosition:
 
 	LDY PlayerAnimationFrame
 	BNE SetSpriteTempScreenPosition_Update
-
-	; Skip making the carried object bob if playing as the Princess
-	LDY CurrentCharacter
-	DEY
-	BEQ SetSpriteTempScreenPosition_Update
 
 	SEC
 	SBC #$01
@@ -10945,8 +10940,15 @@ CheckCollisionWithPlayer:
 
 	; accept the heart into your life
 	STA EnemyState, Y
-	LDA #SoundEffect1_CherryGet
-	STA SoundEffectQueue1
+IFDEF DELTARUNE_HEAL_SOUND
+	LDA #DPCM_PlayerHealed
+	STA DPCMQueue
+ELSE
+	LDA #SoundEffect2_Growing
+	STA SoundEffectQueue2
+	; LDA #SoundEffect1_CherryGet
+	; STA SoundEffectQueue1
+ENDIF
 	LDY PlayerMaxHealth
 	LDA PlayerHealth
 	CLC
@@ -11051,7 +11053,57 @@ loc_BANK3_B878:
 
 ; ---------------------------------------------------------------------------
 
+IFDEF JUMP_STOMPS
+CheckCollisionWithPlayer_StompEnemy:
+	LDA PlayerYVelocity
+	BMI CheckCollisionWithPlayer_ExitStompEnemy
+
+	LDA #EnemyState_Dead
+	STA EnemyState, Y
+
+	LDA EnemyCollision, Y
+	ORA #CollisionFlags_Damage
+	STA EnemyCollision, Y
+
+	; stash Y
+	TYA
+	PHA
+
+	LDY #$02
+	; INY
+
+	LDA JumpHeightStanding, Y
+	AND #$7F
+	ASL A
+	ORA #$80
+	STA PlayerYVelocity
+	LDA JumpFloatLength
+	STA JumpFloatTimer
+
+	; restore Y
+	PLA
+	TAY
+
+	LDA #SoundEffect1_EnemyHit
+	STA SoundEffectQueue1
+
+CheckCollisionWithPlayer_ExitStompEnemy:
+	RTS
+ENDIF
+
 CheckCollisionWithPlayer_NotInvincible:
+IFDEF JUMP_STOMPS
+	LDA ObjectType, Y
+	CMP #Enemy_ShyguyRed
+	BMI CheckCollisionWithPlayer_NoStompEnemy
+	CMP #Enemy_Ostro
+	BPL CheckCollisionWithPlayer_NoStompEnemy
+
+	LDA byte_RAM_F
+	AND #$0B
+	BEQ CheckCollisionWithPlayer_StompEnemy
+CheckCollisionWithPlayer_NoStompEnemy:
+ENDIF
 	LDY byte_RAM_12
 	LDA EnemyState, Y
 	CMP #EnemyState_BombExploding
@@ -11071,7 +11123,6 @@ CheckCollisionWithPlayer_NotInvincible:
 
 CheckCollisionWithPlayer_HurtPlayer:
 	JMP DamagePlayer
-
 
 CheckCollisionWithPlayer_StandingOnHead:
 	LDA #$00
@@ -11374,7 +11425,7 @@ DamagePlayer:
 	LDY #$00
 	STY PlayerYVelocity
 	STY PlayerXVelocity
-	CMP #$10
+	CMP #$00
 	BCC loc_BANK3_BA2C
 
 	LDA PlayerScreenX
@@ -12361,6 +12412,17 @@ HealthBarTiles:
 	.db $B8
 	.db $B8
 	.db $B8
+	.db $B8 ; 5
+	.db $B8
+	.db $B8
+	.db $B8
+	.db $B8
+	.db $B8 ; 6
+	.db $B8
+	.db $B8
+	.db $B8
+	.db $B8
+	.db $B8
 
 POWQuakeOffsets:
 	.db $00
@@ -12414,44 +12476,44 @@ AreaSecondaryRoutine_PlayerPalette:
 	STA byte_RAM_300
 
 AreaSecondaryRoutine_HealthBar:
-	LDA #$30
-	STA byte_RAM_0
-	JSR FindSpriteSlot
+	LDA #$10 ; get initial horizontal position
+	STA byte_RAM_0 ; set initial horizontal position
+	JSR FindSpriteSlot ; find an open sprite slot in RAM
 
-	LDA PlayerHealth
-	BEQ AreaSecondaryRoutine_HealthBar_Draw
+	LDA PlayerHealth ; get player health
+	BEQ AreaSecondaryRoutine_HealthBar_Draw ; draw health bar
 
-	AND #$F0
-	LSR A
-	LSR A
-	ADC #$04 ; max health
+	AND #$F0 ; clear the lower nibble
+	LSR A ; shift right to remove the lower nibble
+	LSR A ; shift right again
+	ADC #$04 ; max health?
 
 AreaSecondaryRoutine_HealthBar_Draw:
 	TAX
 
-	LDA #$FE
-	STA byte_RAM_3
+	LDA #$FE ; initial counter value
+	STA byte_RAM_3 ; set counter
 AreaSecondaryRoutine_HealthBar_Loop:
-	LDA HealthBarTiles, X
-	STA SpriteDMAArea + 1, Y
-	LDA #$10
-	STA SpriteDMAArea + 3, Y
-	LDA #$01
-	STA SpriteDMAArea + 2, Y
-	LDA byte_RAM_0
-	STA SpriteDMAArea, Y
-	CLC
-	ADC #$10
-	STA byte_RAM_0
-	INX
-	INY
-	INY
-	INY
-	INY
-	INC byte_RAM_3
+	LDA HealthBarTiles, X ; get tile
+	STA SpriteDMAArea + 1, Y ; set tile
+	LDA #$10 ; get vertical position
+	STA SpriteDMAArea, Y ; set vertical position
+	LDA #$01; get palette
+	STA SpriteDMAArea + 2, Y ; set palette
+	LDA byte_RAM_0 ; get horizontal position
+	STA SpriteDMAArea + 3, Y ; set horizontal position
+	CLC ; clear
+	ADC #$07
+	STA byte_RAM_0 ; increment horizontal position
+	INX ; increment X
+	INY ; increment Y
+	INY ; increment Y
+	INY ; increment Y
+	INY ; increment Y
+	INC byte_RAM_3 ; increment counter
 	LDA byte_RAM_3
-	CMP PlayerMaxHealth
-	BNE AreaSecondaryRoutine_HealthBar_Loop
+	CMP PlayerMaxHealth ; compare counter to max health
+	BNE AreaSecondaryRoutine_HealthBar_Loop ; continue loop
 
 AreaSecondaryRoutine_POW:
 	LDA POWQuakeTimer
