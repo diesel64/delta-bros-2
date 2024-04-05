@@ -486,7 +486,7 @@ DebugMenu_Health:
 	JMP DebugMenu_MenuLoop
 
 DebugMenu_MenuStart:
-	LDA #DPCM_PlayerDeath
+	LDA #DPCM_PlayerHealed
 	STA DPCMQueue
 	RTS
 
@@ -903,6 +903,30 @@ DebugMenu_CharacterStartTile:
 	.db $88 ; Toad
 	.db $84 ; Luigi
 
+DebugMarioSprites:
+	.db $8F, $00, $00, $48
+	.db $8F, $00, $40, $50
+	.db $9F, $10, $00, $48
+	.db $9F, $02, $40, $50
+
+DebugLuigiSprites:
+	.db $8F, $04, $01, $68
+	.db $8F, $04, $41, $70
+	.db $9F, $06, $01, $68
+	.db $9F, $06, $41, $70
+
+DebugToadSprites:
+	.db $8F, $08, $02, $88
+	.db $8F, $14, $42, $90
+	.db $9F, $0A, $02, $88
+	.db $9F, $0A, $42, $90
+
+DebugPrincessSprites:
+	.db $8F, $0C, $03, $A8
+	.db $8F, $0C, $43, $B0
+	.db $9F, $0E, $03, $A8
+	.db $9F, $0E, $43, $B0
+
 DebugMenu_Palette:
 	.db $22, $30, $16, $0F
 	.db $22, $38, $38, $0F
@@ -999,33 +1023,33 @@ DebugPPU_StartLevelText:
 DebugPPU_UpdateCharacter0:
 	.db 3+$08+3+$03+1
 	.db $21, $12, $08
-	.db $FB, $FB, $FB, $E6, $DA, $EB, $E2, $E8 ; MARIO
+	.db $FB, $FB, $FB, $FB, $E4, $EB, $E2, $EC ; KRIS
 	.db $3F, $11, $03
-	.db $27, $16, $01
+	.db $2C, $15, $02
 	.db $00
 
 DebugPPU_UpdateCharacter1:
 	.db 3+$08+3+$03+1
 	.db $21, $12, $08
-	.db $E9, $EB, $E2, $E7, $DC, $DE, $EC, $EC ; PRINCESS
+	.db $FB, $FB, $E7, $E8, $DE, $E5, $E5, $DE ; NOELLE
 	.db $3F, $11, $03
-	.db $36, $25, $07
+	.db $35, $30, $1C
 	.db $00
 
 DebugPPU_UpdateCharacter2:
 	.db 3+$08+3+$03+1
 	.db $21, $12, $08
-	.db $FB, $FB, $FB, $FB, $ED, $E8, $DA, $DD ; TOAD
+	.db $FB, $FB, $FB, $EC, $EE, $EC, $E2, $DE ; SUSIE
 	.db $3F, $11, $03
-	.db $27, $30, $01
+	.db $25, $27, $04
 	.db $00
 
 DebugPPU_UpdateCharacter3:
 	.db 3+$08+3+$03+1
 	.db $21, $12, $08
-	.db $FB, $FB, $FB, $E5, $EE, $E2, $E0, $E2 ; LUIGI
+	.db $FB, $FB, $EB, $DA, $E5, $EC, $DE, $E2 ; RALSEI
 	.db $3F, $11, $03
-	.db $36, $2A, $01
+	.db $30, $2B, $15
 	.db $00
 
 DebugPPU_UpdateHealth:
