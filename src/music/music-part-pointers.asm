@@ -62,8 +62,11 @@ MusicPartPointers_OverworldEnd:
 
 MusicPartPointers_Boss:
 MusicPartPointers_BossLoop:
+	musicPart MusicHeaderBoss0
+	musicPart MusicHeaderBoss1
+	musicPart MusicHeaderBoss0
 MusicPartPointers_BossEnd:
-	musicPart MusicHeaderBoss
+	musicPart MusicHeaderBoss2
 
 
 IFNDEF PROTOTYPE_MUSIC_STARMAN

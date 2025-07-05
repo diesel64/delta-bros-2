@@ -25,7 +25,23 @@ Music_UndergroundBeta:
 	.db <MusicHeaderUndergroundBeta2
 ENDIF
 Music_Boss:
-	.db <MusicHeaderBoss
+	.db <MusicHeaderBoss1
+	.db <MusicHeaderBoss2
+	.db <MusicHeaderBoss3
+	.db <MusicHeaderBoss4
+	.db <MusicHeaderBoss5
+	.db <MusicHeaderBoss6
+	.db <MusicHeaderBoss7
+	.db <MusicHeaderBoss8
+	.db <MusicHeaderBoss9
+	.db <MusicHeaderBoss10
+	.db <MusicHeaderBoss11
+	.db <MusicHeaderBoss12
+	.db <MusicHeaderBoss13
+	.db <MusicHeaderBoss14
+	.db <MusicHeaderBoss15
+	.db <MusicHeaderBoss16
+	.db <MusicHeaderBoss17
 IFNDEF PROTOTYPE_MUSIC_UNDERGROUND
 Music_Star:
 	.db <MusicHeaderStar
@@ -86,7 +102,23 @@ ELSE
 	.db >MusicHeaderUndergroundBeta1
 	.db >MusicHeaderUndergroundBeta2
 ENDIF
-	.db >MusicHeaderBoss
+	.db >MusicHeaderBoss1
+	.db >MusicHeaderBoss2
+	.db >MusicHeaderBoss3
+	.db >MusicHeaderBoss4
+	.db >MusicHeaderBoss5
+	.db >MusicHeaderBoss6
+	.db >MusicHeaderBoss7
+	.db >MusicHeaderBoss8
+	.db >MusicHeaderBoss9
+	.db >MusicHeaderBoss10
+	.db >MusicHeaderBoss11
+	.db >MusicHeaderBoss12
+	.db >MusicHeaderBoss13
+	.db >MusicHeaderBoss14
+	.db >MusicHeaderBoss15
+	.db >MusicHeaderBoss16
+	.db >MusicHeaderBoss17
 IFNDEF PROTOTYPE_MUSIC_UNDERGROUND
 	.db >MusicHeaderStar
 ELSE
@@ -180,8 +212,39 @@ MusicPartPointers_OverworldEnd:
 
 MusicPartPointers_Boss:
 MusicPartPointers_BossLoop:
-MusicPartPointers_BossEnd:
 	musicPointerOffset Music_Boss, 0
+	musicPointerOffset Music_Boss, 1
+	musicPointerOffset Music_Boss, 0
+	musicPointerOffset Music_Boss, 2
+	musicPointerOffset Music_Boss, 0
+	musicPointerOffset Music_Boss, 1
+	musicPointerOffset Music_Boss, 0
+	musicPointerOffset Music_Boss, 2
+	musicPointerOffset Music_Boss, 3
+	musicPointerOffset Music_Boss, 4
+	musicPointerOffset Music_Boss, 3
+	musicPointerOffset Music_Boss, 5
+	musicPointerOffset Music_Boss, 3
+	musicPointerOffset Music_Boss, 4
+	musicPointerOffset Music_Boss, 3
+	musicPointerOffset Music_Boss, 5
+	musicPointerOffset Music_Boss, 6
+	musicPointerOffset Music_Boss, 7
+	musicPointerOffset Music_Boss, 8
+	musicPointerOffset Music_Boss, 9
+	musicPointerOffset Music_Boss, 6
+	musicPointerOffset Music_Boss, 7
+	musicPointerOffset Music_Boss, 8
+	musicPointerOffset Music_Boss, 10
+	musicPointerOffset Music_Boss, 11
+	musicPointerOffset Music_Boss, 1
+	musicPointerOffset Music_Boss, 0
+	musicPointerOffset Music_Boss, 12
+	musicPointerOffset Music_Boss, 13
+	musicPointerOffset Music_Boss, 14
+	musicPointerOffset Music_Boss, 15
+MusicPartPointers_BossEnd:
+	musicPointerOffset Music_Boss, 16
 
 
 IFNDEF PROTOTYPE_MUSIC_STARMAN

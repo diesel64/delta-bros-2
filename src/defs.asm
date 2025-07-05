@@ -102,6 +102,83 @@ Music2_StopMusic = $80
 
 ; ---------------------------------------------------------------------------
 
+; pitches
+.enum $0000
+C_:
+	.dsb 2
+C#:
+	.dsb 2
+D_:
+	.dsb 2
+D#:
+	.dsb 2
+E_:
+	.dsb 2
+F_:
+	.dsb 2
+F#:
+	.dsb 2
+G_:
+	.dsb 2
+G#:
+	.dsb 2
+A_:
+	.dsb 2
+A#:
+	.dsb 2
+B_:
+.ende
+
+; note lengths
+.enum $0000
+SIXTEENTH: ; 0
+	.dsb 1
+	.dsb 1
+QUARTER_TRIPLET: ; 2
+	.dsb 1
+	.dsb 1
+EIGHTH: ; 4
+	.dsb 1
+DOTTED_EIGHTH: ; 5
+	.dsb 1
+HALF_TRIPLET: ; 6
+	.dsb 1
+QRT_HF_TIE:
+	.dsb 1
+QUARTER: ; 8
+	.dsb 1
+DOTTED_QUARTER: ; 9
+	.dsb 1
+HALF: ; a
+	.dsb 1
+DOTTED_HALF: ; b
+	.dsb 1
+WHOLE: ; c
+	.dsb 1
+SIXTEENTH_TRIPLET:
+	.dsb 1
+EIGHTH_TRIPLET:
+	.dsb 1
+WHOLE_TRIPLET:
+.ende
+
+.enum $0001
+Noise_ClosedHihat:
+	.dsb 1
+Noise_UpperSnare:
+	.dsb 1
+Noise_OpenHihat:
+	.dsb 1
+Noise_Kick:
+	.dsb 1
+Noise_Snare:
+	.dsb 1
+Noise_DoubleSnare:
+	.dsb 1
+.ende
+
+; ---------------------------------------------------------------------------
+
 ; enum ControllerInput (bitfield) (width 1 byte)
 ControllerInput_Right = %00000001
 ControllerInput_Left = %00000010

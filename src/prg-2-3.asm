@@ -104,6 +104,7 @@ ENDIF
 
 	; Play the slide-whistle when you start the game and drop into 1-1
 	ORA CurrentLevel
+	ORA CurrentLevelArea
 	BNE AreaInitialization_CheckObjectCarriedOver
 
 	LDA #SoundEffect2_IntroFallSlide
@@ -12412,17 +12413,6 @@ HealthBarTiles:
 	.db $B8
 	.db $B8
 	.db $B8
-	.db $B8 ; 5
-	.db $B8
-	.db $B8
-	.db $B8
-	.db $B8
-	.db $B8 ; 6
-	.db $B8
-	.db $B8
-	.db $B8
-	.db $B8
-	.db $B8
 
 POWQuakeOffsets:
 	.db $00
@@ -12484,8 +12474,8 @@ AreaSecondaryRoutine_HealthBar:
 	BEQ AreaSecondaryRoutine_HealthBar_Draw ; draw health bar
 
 	AND #$F0 ; clear the lower nibble
-	LSR A ; shift right to remove the lower nibble
-	LSR A ; shift right again
+	LSR A
+	LSR A
 	ADC #$04 ; max health?
 
 AreaSecondaryRoutine_HealthBar_Draw:

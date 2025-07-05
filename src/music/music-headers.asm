@@ -70,14 +70,56 @@ ENDIF
 
 ; ----------------------------------------
 ; Boss and boss area music
-MusicHeaderBoss:
-IFNDEF PROTOTYPE_MUSIC_ENDING
-	musicHeader NoteLengthTable_200bpm, MusicDataBoss, MusicDataBoss_Triangle, MusicDataBoss_Square1, $00, -1
-ELSE
-	; sharing $00 with NoteLengthTable_300bpm from the segment below
-	; (we're scrounging for bytes to avoid overflowing the music header table)
-	musicHeader NoteLengthTable_200bpm, MusicDataBoss, MusicDataBoss_Triangle, MusicDataBoss_Square1, -1, -1
-ENDIF
+MusicHeaderBoss1:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss1, MusicDataBoss1_Triangle, MusicDataBoss1_Square1, MusicDataBoss1_Noise, -1
+
+MusicHeaderBoss2:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss2, MusicDataBoss2_Triangle, MusicDataBoss2_Square1, MusicDataBoss2_Noise, -1
+
+MusicHeaderBoss3:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss3, MusicDataBoss3_Triangle, MusicDataBoss3_Square1, MusicDataBoss3_Noise, -1
+
+MusicHeaderBoss4:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss4, MusicDataBoss4_Triangle, MusicDataBoss4_Square1, MusicDataBoss4_Noise, -1
+
+MusicHeaderBoss5:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss5, MusicDataBoss5_Triangle, MusicDataBoss5_Square1, MusicDataBoss6_Noise, -1
+
+MusicHeaderBoss6:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss6, MusicDataBoss6_Triangle, MusicDataBoss6_Square1, MusicDataBoss6_Noise, -1
+
+MusicHeaderBoss7:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss7, MusicDataBoss7_Triangle, MusicDataBoss7_Square1, MusicDataBoss7_Noise, -1
+
+MusicHeaderBoss8:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss8, MusicDataBoss8_Triangle, MusicDataBoss8_Square1, MusicDataBoss8_Noise, -1
+
+MusicHeaderBoss9:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss9, MusicDataBoss9_Triangle, MusicDataBoss9_Square1, MusicDataBoss9_Noise, -1
+
+MusicHeaderBoss10:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss10, MusicDataBoss10_Triangle, MusicDataBoss10_Square1, MusicDataBoss10_Noise, -1
+
+MusicHeaderBoss11:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss11, MusicDataBoss11_Triangle, MusicDataBoss11_Square1, MusicDataBoss11_Noise, -1
+
+MusicHeaderBoss12:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss12, MusicDataBoss12_Triangle, MusicDataBoss12_Square1, MusicDataBoss12_Noise, -1
+
+MusicHeaderBoss13:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss13, MusicDataBoss13_Triangle, MusicDataBoss13_Square1, MusicDataBoss13_Noise, -1
+
+MusicHeaderBoss14:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss14, MusicDataBoss14_Triangle, MusicDataBoss14_Square1, MusicDataBoss14_Noise, -1
+
+MusicHeaderBoss15:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss15, MusicDataBoss15_Triangle, MusicDataBoss15_Square1, MusicDataBoss15_Noise, -1
+
+MusicHeaderBoss16:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss16, MusicDataBoss16_Triangle, MusicDataBoss16_Square1, MusicDataBoss16_Noise, -1
+
+MusicHeaderBoss17:
+	musicHeader NoteLengthTable_200bpm, MusicDataBoss17, MusicDataBoss17_Triangle, MusicDataBoss17_Square1, MusicDataBoss17_Noise, -1
 
 ; ----------------------------------------
 ; Starman music

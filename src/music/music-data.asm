@@ -154,7 +154,23 @@ ENDIF
 ;
 ; Boss music segment...
 ;
-.include "src/music/segments/boss/boss.asm"
+.include "src/music/segments/boss/boss-1.asm"
+.include "src/music/segments/boss/boss-2.asm"
+.include "src/music/segments/boss/boss-3.asm"
+.include "src/music/segments/boss/boss-4.asm"
+.include "src/music/segments/boss/boss-5.asm"
+.include "src/music/segments/boss/boss-6.asm"
+.include "src/music/segments/boss/boss-7.asm"
+.include "src/music/segments/boss/boss-8.asm"
+.include "src/music/segments/boss/boss-9.asm"
+.include "src/music/segments/boss/boss-10.asm"
+.include "src/music/segments/boss/boss-11.asm"
+.include "src/music/segments/boss/boss-12.asm"
+.include "src/music/segments/boss/boss-13.asm"
+.include "src/music/segments/boss/boss-14.asm"
+.include "src/music/segments/boss/boss-15.asm"
+.include "src/music/segments/boss/boss-16.asm"
+.include "src/music/segments/boss/boss-17.asm"
 
 ;
 ; Wart's final boss music segment

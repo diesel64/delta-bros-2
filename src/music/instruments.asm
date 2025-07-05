@@ -10,6 +10,7 @@
 ;
 InstrumentSoundData:
 
+; ===================== 1 =====================
 ; Long square
 ; 50% duty cycle (square) with slight decay
 InstrumentDVE_80: ; $A18D
@@ -24,6 +25,7 @@ InstrumentDVE_80_Short: ; $A1CD
 	.db $90, $92, $94, $96, $96, $96, $96, $96, $96, $96, $96, $96, $96, $96, $96, $96
 	.db $96, $97, $97, $97, $97, $98, $98
 
+; ===================== 2 =====================
 ; Short square
 ; 25% duty cycle with pronounced decay
 InstrumentDVE_90_E0: ; $A1E4
@@ -38,6 +40,7 @@ InstrumentDVE_90_E0_Short: ; $A224
 	.db $51, $51, $51, $51, $51, $51, $51, $51, $51, $51, $51, $51, $51, $52, $53, $54
 	.db $55, $56, $57, $58, $59, $5A, $5B
 
+; ===================== 3 =====================
 ; Electric Piano
 ; 12.5% duty cycle with pronounced decay
 InstrumentDVE_A0: ; $A23B
@@ -52,6 +55,7 @@ InstrumentDVE_A0_Short: ; $A27B
 	.db $10, $11, $12, $13, $14, $15, $16, $17, $17, $18, $18, $18, $18, $18, $18, $18
 	.db $19, $19, $19, $1A, $1A, $1B, $1B, $1C
 
+; ===================== 4 =====================
 ; Organ
 ; 25% duty cycle with slight decay
 InstrumentDVE_B0: ; $A293
@@ -66,6 +70,7 @@ InstrumentDVE_B0_Short: ; $A2D3
 	.db $51, $52, $52, $52, $52, $53, $53, $53, $53, $53, $53, $53, $54, $54, $54, $54
 	.db $54, $54, $54, $55, $55, $56, $56
 
+; ===================== 5 =====================
 ; Strings
 ; 25% duty cycle with slow attack
 InstrumentDVE_C0_Short: ; $A2EA
@@ -80,6 +85,7 @@ InstrumentDVE_C0: ; $A301
 	.db $58, $58, $58, $58, $58, $58, $58, $58, $58, $58, $59, $59, $59, $59, $5A, $5A
 	.db $5A, $5A, $5A, $5B, $5B, $5B, $5B, $5B, $5B, $5B, $5A, $59, $58, $56, $55, $55
 
+; ===================== 6 =====================
 ; Pluck
 ; 50% to -25% to 12.5% to 12.5% duty cycle with pronounced decay
 InstrumentDVE_D0: ; $A341
@@ -94,6 +100,7 @@ InstrumentDVE_D0_Short: ; $A381
 	.db $50, $51, $51, $51, $51, $51, $51, $51, $51, $51, $51, $51, $51, $52, $53, $54
 	.db $55, $56, $57, $58, $19, $DA, $9B
 
+; ===================== 7 =====================
 IFNDEF PROTOTYPE_INSTRUMENTS
 ; Soft pluck
 ; 25% duty cycle with pronounced decay

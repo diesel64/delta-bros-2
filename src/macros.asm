@@ -111,3 +111,37 @@ MACRO musicHeader noteLengthLabel, square2, triangle, square1, noise, dpcm
 		ENDIF
 	ENDIF
 ENDM
+
+MACRO note_type ins, length
+i = (ins - 1) << 4
+	.db $80 + i + length
+ENDM
+
+MACRO note pitch, oct
+o = (oct - 1) * $18
+	.db pitch + o
+ENDM
+
+MACRO rest
+	.db $7E
+ENDM
+
+MACRO sound_ret
+	.db $00
+ENDM
+
+MACRO toggle_sweep
+	.db $00
+ENDM
+
+MACRO sound_loop
+	.db $00
+ENDM
+
+MACRO drum_note id
+	.db id * 2
+ENDM
+
+MACRO drum_rest
+	.db $01
+ENDM
