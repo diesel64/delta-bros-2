@@ -65,9 +65,9 @@ ENDIF
 
 ; -----------------------------------------
 ; Add definitions
-.enum $0000
+; .enum $0000
 .include "src/defs.asm"
-.ende
+; .ende
 
 ; Add RAM definitions
 .enum $0000

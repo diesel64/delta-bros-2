@@ -122,7 +122,7 @@ CHARACTER_SELECT_AFTER_DEATH = 1
 ; NOTE: The prototype underground music requires the shortened prototype ending music to fit
 ; everything in the music header table. Use EXPAND_MUSIC to remove this restriction.
 ; PROTOTYPE_DPCM_SAMPLES = 1
-; PROTOTYPE_INSTRUMENTS = 1
+PROTOTYPE_INSTRUMENTS = 1
 ; PROTOTYPE_MUSIC_STARMAN = 1
 ; PROTOTYPE_MUSIC_UNDERGROUND = 1
 ; PROTOTYPE_MUSIC_ENDING = 1
@@ -158,7 +158,7 @@ EXPAND_PRG = 1
 ; FME7 = 1
 
 ; Pads title screen PPU data for easier modification
-; PAD_TITLE_SCREEN_PPU_DATA = 1
+PAD_TITLE_SCREEN_PPU_DATA = 1
 
 ; Expands various lookup tables so that more values can be added
 ; EXPAND_TABLES = 1
@@ -167,7 +167,7 @@ EXPAND_PRG = 1
 BONUS_CHANCE_RAM_CLEANUP = 1
 
 ; Uses an alternative pointer method for music headers to allow for more segments
-; EXPAND_MUSIC = 1
+EXPAND_MUSIC = 1
 
 ; Encode world tileset in unused 3 bits of area header byte 2
 ; AREA_HEADER_TILESET = 1
