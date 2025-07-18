@@ -1,63 +1,114 @@
 MusicDataOverworld5:
 MusicDataOverworld5_Square2:
-	.db $92
-	.db $5A
-	.db $7E
-	.db $56
-	.db $50
-	.db $7E
-	.db $9A
-	.db $48
-	.db $82
-	.db $3C
-	.db $3E
-	.db $7E
-	.db $40
-	.db $42
-	.db $7E
-	.db $48
-	.db $7E
-	.db $7E
-	.db $88
-	.db $7E
-	.db $82
-	.db $48
-	.db $88
-	.db $7E
-	.db $E2
-	.db $7E
-	.db $7E
-	.db $50
-	.db $00
+    note_type 2, QUARTER_TRIPLET
+    note    C_, 4
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    note    G_, 3
+    rest
+    rest
+    note    E_, 4
+    rest
+    rest
+    note    F_, 4
+    rest
+    rest
+    note    D_, 4
+    rest
+    rest
+    rest
+    rest
+    note    C_, 4
+    note    C_, 4
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    note_type 1, QUARTER_TRIPLET
+    note    A_, 3                   ; .db $42
+    rest                            ; .db $7E
+    note    C_, 4                   ; .db $48
+    rest                            ; .db $7E
+    rest                            ; .db $7E
+    note_type 1, QUARTER            ; .db $88
+    rest                            ; .db $7E
+    note_type 1, QUARTER_TRIPLET    ; .db $82
+    note    C_, 4                   ; .db $48
+    note_type 1, QUARTER            ; .db $88
+    rest                            ; .db $7E
+    note_type 7, QUARTER_TRIPLET    ; .db $E2
+    rest                            ; .db $7E
+    rest                            ; .db $7E
+    note    E_, 4                   ; .db $50
+    sound_ret                       ; .db $00
 MusicDataOverworld5_Square1:
-	.db $92
-	.db $48
-	.db $7E
-	.db $46
-	.db $3E
-	.db $7E
-	.db $9A
-	.db $38
-	.db $88
-	.db $7E
-	.db $82
-	.db $7E
-	.db $3A
-	.db $7E
-	.db $38
-	.db $7E
-	.db $7E
-	.db $88
-	.db $7E
-	.db $82
-	.db $38
-	.db $88
-	.db $7E
-	.db $E2
-	.db $7E
-	.db $7E
-	.db $38
+    note_type 2, QUARTER_TRIPLET
+    note    E_, 3
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    note    C_, 3
+    rest
+    rest
+    note    C_, 4
+    rest
+    rest
+    note    D_, 4
+    rest
+    rest
+    note    A_, 3
+    rest
+    rest
+    rest
+    rest
+    note    E_, 3
+    note    E_, 3
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    note_type 1, QUARTER_TRIPLET
+    note    F_, 3                   ; .db $3A
+    rest                            ; .db $7E
+    note    E_, 3                   ; .db $38
+    rest                            ; .db $7E
+    rest                            ; .db $7E
+    note_type 1, QUARTER            ; .db $88
+    rest                            ; .db $7E
+    note_type 1, QUARTER_TRIPLET    ; .db $82
+    note    E_, 3                   ; .db $38
+    note_type 1, QUARTER            ; .db $88
+    rest                            ; .db $7E
+    note_type 7, QUARTER_TRIPLET    ; .db $E2
+    rest                            ; .db $7E
+    rest                            ; .db $7E
+    note    E_, 3                   ; .db $38
 MusicDataOverworld5_Triangle:
+    note    G_, 2                   ; .db $26
+    note    G_, 3                   ; .db $3E
+    note    F_, 3                   ; .db $3A
+    note    D_, 3                   ; .db $34
+    note    B_, 2                   ; .db $2E
+    note    G_, 2                   ; .db $26
 	.db $2A
 	.db $2E
 	.db $30

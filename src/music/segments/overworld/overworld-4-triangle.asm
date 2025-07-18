@@ -1,5 +1,11 @@
 MusicDataOverworld4_Triangle:
 	.db $88
+    note    G_, 2                   ; .db $26
+    note    G_, 3                   ; .db $3E
+    note    F_, 3                   ; .db $3A
+    note    D_, 3                   ; .db $34
+    note    B_, 2                   ; .db $2E
+    note    G_, 2                   ; .db $26
 	.db $2A
 	.db $2E
 	.db $30

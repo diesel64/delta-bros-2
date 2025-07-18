@@ -1,40 +1,52 @@
 MusicDataOverworld4:
 MusicDataOverworld4_Square2:
-	.db $92
-	.db $50
-	.db $7E
-	.db $4C
-	.db $48
-	.db $7E
-	.db $98
-	.db $50
-	.db $90
-	.db $3E
-	.db $50
-	.db $3E
-	.db $50
-	.db $3E
-	.db $50
-	.db $3E
-	.db $50
-	.db $3E
-	.db $50
-	.db $3E
-	.db $50
-	.db $92
-	.db $7E
-	.db $7E
-	.db $C2
-	.db $7E
-	.db $7E
-	.db $56
-	.db $7E
-	.db $4E
-	.db $7E
-	.db $46
-	.db $7E
-	.db $42
-	.db $7E
-	.db $3E
-	.db $7E
-	.db $00
+    note_type 2, QUARTER_TRIPLET
+    note    C_, 4
+    rest
+    note    C_, 4
+    note    C_, 4
+    rest
+    rest
+    note    C_, 4
+    rest
+    rest
+    note    C_, 4
+    rest
+    note    C_, 4
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    note    B_, 4
+    rest
+    rest
+    note    C_, 5
+    rest
+    rest
+    note    B_, 4
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    note    G_, 4
+    rest
+    rest
+    note    E_, 4
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    rest
+    note    E_, 4
+    rest
+    note    F_, 4
+	sound_ret

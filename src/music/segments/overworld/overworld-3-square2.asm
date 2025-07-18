@@ -1,72 +1,57 @@
 MusicDataOverworld3:
 MusicDataOverworld3_Square2:
-	.db $92
-	.db $7E
-	.db $7E
-	.db $98
-	.db $50
-	.db $92
-	.db $7E
-	.db $56
-	.db $7E
-	.db $7E
-	.db $5A
-	.db $7E
-	.db $9A
-	.db $60
-	.db $92
-	.db $7E
-	.db $5A
-	.db $7E
-	.db $56
-	.db $50
-	.db $7E
-	.db $48
-	.db $4C
-	.db $7E
-	.db $50
-	.db $4C
-	.db $7E
-	.db $50
-	.db $4C
-	.db $7E
-	.db $42
-	.db $7E
-	.db $7E
-	.db $98
-	.db $4C
-	.db $90
-	.db $42
-	.db $4C
-	.db $42
-	.db $4C
-	.db $42
-	.db $4C
-	.db $42
-	.db $4C
-	.db $42
-	.db $4C
-	.db $42
-	.db $4C
-	.db $92
-	.db $7E
-	.db $98
-	.db $4C
-	.db $92
-	.db $50
-	.db $4C
-	.db $7E
-	.db $50
-	.db $4C
-	.db $7E
-	.db $50
-	.db $7E
-	.db $7E
-	.db $98
-	.db $5A
-	.db $92
-	.db $56
-	.db $5A
-	.db $7E
-	.db $56
-	.db $00
+    note_type 2, QUARTER_TRIPLET
+    note    G_, 4
+    rest
+    note    G_, 4
+    note    G_, 4
+    rest
+    note    G_, 4
+    rest
+    rest
+    rest
+    note    G_, 4
+    rest
+    note    G_, 4
+    rest
+    rest
+    rest
+    rest
+    rest
+    note    C_, 4
+    rest
+    rest
+    note    C_, 4
+    note    E_, 4
+    rest
+    rest
+    note    D_, 4
+    rest
+    note    D_, 4
+    note    D_, 4
+    rest
+    note    D_, 4
+    rest
+    rest
+    note    D_, 4
+    rest
+    rest
+    rest
+    .db $90
+    note    A_, 3
+    note    D_, 4
+    note    A_, 3
+    note    D_, 4
+    note    A_, 3
+    note    D_, 4
+    note    A_, 3
+    note    D_, 4
+    note    A_, 3
+    note_type 2, QUARTER_TRIPLET
+    note    E_, 4
+    rest
+    rest
+    note    D_, 4
+    rest
+    rest
+	sound_ret
